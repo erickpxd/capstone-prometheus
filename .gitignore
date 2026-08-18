@@ -1,0 +1,35 @@
+# .NET
+bin/
+obj/
+TestResults/
+coverage/
+*.user
+*.suo
+.vs/
+
+# Frontend
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Banco local da demonstração
+*.db
+*.db-shm
+*.db-wal
+
+# Configuração local e segredos
+.env
+.env.*
+!.env.example
+appsettings.Local.json
+secrets.json
+
+# IDE e sistema operacional
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+

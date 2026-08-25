@@ -3,12 +3,10 @@ import type { FormEvent } from 'react'
 import { api } from '../api/client'
 import { getApiErrorMessage } from '../api/errors'
 import { useAuth } from '../auth/useAuth'
-import { AccessChecks } from '../components/AccessChecks'
 import { AuthenticatedLayout } from '../layouts/AuthenticatedLayout'
 import type {
   CreateUserRequest,
   CreatableRole,
-  DemoResponse,
   User,
 } from '../types/auth'
 
@@ -29,7 +27,6 @@ export function AdminDashboard() {
   const [users, setUsers] = useState<User[]>([])
   const [selectedRole, setSelectedRole] = useState<CreatableRole>('Aluno')
   const [form, setForm] = useState<UserFormState>(emptyForm)
-  const [demoMessage, setDemoMessage] = useState('')
   const [loadError, setLoadError] = useState('')
   const [formError, setFormError] = useState('')
   const [success, setSuccess] = useState('')
@@ -39,14 +36,11 @@ export function AdminDashboard() {
   useEffect(() => {
     let isActive = true
 
-    Promise.all([
-      api.get<DemoResponse>('/api/demo/admin'),
-      api.get<User[]>('/api/users'),
-    ])
-      .then(([demoResponse, usersResponse]) => {
+    api
+      .get<User[]>('/api/users')
+      .then(({ data }) => {
         if (isActive) {
-          setDemoMessage(demoResponse.data.message)
-          setUsers(usersResponse.data)
+          setUsers(data)
         }
       })
       .catch((requestError) => {
@@ -104,19 +98,11 @@ export function AdminDashboard() {
         <div>
           <p className="eyebrow">Administração</p>
           <h1>Bem-vindo, {user?.name}.</h1>
-          <p>Gerencie as contas demonstrativas de Professores e Alunos.</p>
+          <p>Gerencie as contas de Professores e Alunos.</p>
         </div>
       </header>
 
-      <section className="dashboard-grid dashboard-grid--admin">
-        <article className="card access-card">
-          <h2>Validação do acesso</h2>
-          <AccessChecks role="Admin" authorized={Boolean(demoMessage)} />
-          {demoMessage && <p className="api-message">{demoMessage}</p>}
-          {isLoading && <p className="muted" aria-live="polite">Validando com a API...</p>}
-          {loadError && <div className="alert alert--error" role="alert">{loadError}</div>}
-        </article>
-
+      <section className="dashboard-grid">
         <article className="card create-user-card">
           <div className="card__heading">
             <div>
@@ -198,6 +184,9 @@ export function AdminDashboard() {
           </div>
           <span className="count-badge">{users.length}</span>
         </div>
+
+        {isLoading && <p className="muted" aria-live="polite">Carregando usuários...</p>}
+        {loadError && <div className="alert alert--error" role="alert">{loadError}</div>}
 
         <div className="table-wrapper">
           <table>

@@ -346,11 +346,6 @@ button:focus-visible {
   gap: 1.25rem;
 }
 
-.dashboard-grid--admin {
-  grid-template-columns: minmax(260px, 0.75fr) minmax(420px, 1.25fr);
-  align-items: start;
-}
-
 .role-dashboard {
   grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
 }
@@ -651,7 +646,6 @@ tbody tr:last-child td {
     margin: 0 auto;
   }
 
-  .dashboard-grid--admin,
   .role-dashboard {
     grid-template-columns: 1fr;
   }

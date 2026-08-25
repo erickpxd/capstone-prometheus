@@ -88,7 +88,7 @@ export function LoginPage() {
       <aside className="login-visual" aria-hidden="true">
         <div>
           <span className="login-visual__number">V2</span>
-          <p>Identidade, autenticação e autorização demonstradas de ponta a ponta.</p>
+          <p>Identidade, autenticação e autorização integradas de ponta a ponta.</p>
         </div>
       </aside>
     </main>

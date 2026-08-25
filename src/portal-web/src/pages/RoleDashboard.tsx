@@ -69,7 +69,7 @@ export function RoleDashboard({ role, endpoint }: RoleDashboardProps) {
         </article>
 
         <aside className="card info-card">
-          <p className="eyebrow">Escopo demonstrativo</p>
+          <p className="eyebrow">Informações da sessão</p>
           <h2>Sessão ativa</h2>
           <p>
             Esta área confirma a autenticação por JWT e a autorização por perfil.
